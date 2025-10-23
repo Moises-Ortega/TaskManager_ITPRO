@@ -1,22 +1,15 @@
 <?php
 
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\StaticPageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-    return redirect()->route('home');
-});
+Route::get('/', [StaticPageController::class, 'root']);
 
-Route::get('/principal', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/principal', [StaticPageController::class, 'home'])->name('home');
 
-Route::get('/about', function(){
-    return view('about');
-})->name('about');
+Route::get('/about', [StaticPageController::class, 'about'])->name('about');
 
-Route::get('/contactactanos', function(){
-    return view('contacto');
-})->name('contact');
+Route::get('/contactactanos', [StaticPageController::class, 'contact'])->name('contact');
 
-Route::get('/tasks', [TaskController::class, 'index']);
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
