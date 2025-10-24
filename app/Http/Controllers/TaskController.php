@@ -3,21 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = [
-            ['titulo' => 'Tarea opcional'],
-            ['titulo' => 'Tarea obligatoria'],
-            ['titulo' => 'Terminar informe bimestral de servicio social'],
-            ['titulo' => 'Comprar pluma']
-        ];
-        $unlessVariable = [1, 2, 3];
-        $counter = 1;
-        $sum = 0;
-        $name = "<script>alert('Hackeado!');</script>";
-        return view('tasks.index', compact('tasks', 'unlessVariable', 'counter', 'sum', 'name'));
+        $tasks = Task::with(['status'], ['priority'])->get();
+        return view('tasks.index', compact('tasks'));
     }
 }
