@@ -12,5 +12,6 @@ Route::get('/about', [StaticPageController::class, 'about'])->name('about');
 
 Route::get('/contactactanos', [StaticPageController::class, 'contact'])->name('contact');
 
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+//Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
 
+Route::resource('/tasks', TaskController::class);
