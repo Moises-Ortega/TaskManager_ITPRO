@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::with(['status'], ['priority'])->get();
+        $tasks = Task::where('user_id', auth()->id())->with(['status', 'priority'])->get();
         return view('tasks.index', compact('tasks'));
     }
 
@@ -32,6 +32,8 @@ class TaskController extends Controller
             'priority_id' => 'required|exists:task_priorities,id',
         ]);
 
+        $validated['user_id'] = auth()->id();
+
         Task::create($validated);
 
         return redirect()->route('tasks.index')->with('succes', 'Tarea creada exitosamente.');
@@ -46,6 +48,11 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
+
+        if($task->user_id !== auth()->id()){
+            abort(403);
+        }
+
         $validated = $request->validate([
             'title' => 'required|string|max:60',
             'description' => 'required|string|max:500',
@@ -61,6 +68,11 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+
+        if($task->user_id !== auth()->id()){
+            abort(403);
+        }
+
         $task->delete();
 
         return redirect()->route('tasks.index')->with('succes', 'Tarea eliminada exitosamente.');

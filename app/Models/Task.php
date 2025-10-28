@@ -15,7 +15,8 @@ class Task extends Model
         'description',
         'deadline',
         'status_id',
-        'priority_id'
+        'priority_id',
+        'user_id'
     ];
 
     // protected $guarded = [
@@ -37,6 +38,11 @@ class Task extends Model
     public function priority()
     {
         return $this->belongsTo(TaskPriority::class, 'priority_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

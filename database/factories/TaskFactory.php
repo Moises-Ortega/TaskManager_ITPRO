@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Task;
 use App\Models\TaskStatus;
@@ -28,6 +29,7 @@ class TaskFactory extends Factory
             'deadline' => fake()->dateTimeBetween('now', '+1 year'),
             'status_id' => TaskStatus::inRandomOrder()->first()->id,
             'priority_id' => TaskPriority::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }
