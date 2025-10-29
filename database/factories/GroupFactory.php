@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\GroupCategory;
 use App\Models\GroupPriority;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Group;
 
@@ -27,6 +28,7 @@ class GroupFactory extends Factory
             'description' => fake()->paragraph(5),
             'category_id' => GroupCategory::inRandomOrder()->first()->id,
             'priority_id' => GroupPriority::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }

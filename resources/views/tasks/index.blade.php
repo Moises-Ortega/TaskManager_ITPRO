@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="es" class="dark"> 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Tareas</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
 
-</head>
+<x-app-layout>
 
-<body class="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 min-h-screen">
+    <x-slot name="header">
+        <div class="flex justify-between">
+            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-200 leading-tight">
+                {{ 'Mis Tareas' }}
+            </h2>
+            <a href="{{ route('tasks.create') }}"
+                class="text-sm text-gray-900 hover:text-purple-100 transition duration-300">
+                Crear tarea
+            </a>
+        </div>
+    </x-slot>
 
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        
-        <h1 class="font-semibold text-3xl text-gray-800 dark:text-gray-200 leading-tight mb-8">
-            Mis Tareas
-        </h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
@@ -107,7 +105,7 @@
                         </svg>
                         <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">¡Todo en orden!</h3>
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">No tienes tareas registradas por el momento.</p>
-                        <a href="#" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <a href="{{ route('tasks.create') }}" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Crear primera tarea
                         </a>
                     </div>
@@ -117,5 +115,4 @@
         </div>
     </div>
 
-</body>
-</html>
+</x-app-layout>

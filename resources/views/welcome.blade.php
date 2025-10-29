@@ -30,6 +30,13 @@
         Contacto
       </a>
     </div>
+
+    <div class="flex justify-center space-x-4 py-8">
+      <a href="{{ route('login') }}" class="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition transform hover:scale-105 shadow-lg">
+        Iniciar sesión
+      </a>
+    </div>
+  
   </div>
 
   <!-- Fondo decorativo -->
