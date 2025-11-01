@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Task;
@@ -30,6 +31,7 @@ class TaskFactory extends Factory
             'status_id' => TaskStatus::inRandomOrder()->first()->id,
             'priority_id' => TaskPriority::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
+            'group_id' => Group::inRandomOrder()->first()->id,
         ];
     }
 }

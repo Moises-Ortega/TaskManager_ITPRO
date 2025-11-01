@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             TaskCatalogsSeeder::class,
-            TaskSeeder::class,
             GroupCatalogsSeeder::class,
             GroupSeeder::class,
+            TaskSeeder::class,
         ]);
 
     }

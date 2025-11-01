@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::where('user_id', auth()->id())->with(['status', 'priority'])->get();
+        $tasks = auth()->user()->tasks()->orderBy('priority_id', 'desc')->orderBy('status_id', 'asc')->get();
         return view('tasks.index', compact('tasks'));
     }
 
@@ -19,7 +19,8 @@ class TaskController extends Controller
     {
         $statuses = TaskStatus::all();
         $priorities = TaskPriority::all();
-        return view('tasks.create', compact('statuses', 'priorities'));
+        $groups = auth()->user()->groups()->get();
+        return view('tasks.create', compact('statuses', 'priorities', 'groups'));
     }
 
     public function store(Request $request)
@@ -30,6 +31,7 @@ class TaskController extends Controller
             'deadline' => 'nullable|date',
             'status_id' => 'required|exists:task_statuses,id',
             'priority_id' => 'required|exists:task_priorities,id',
+            'group_id' => 'nullable|exists:groups,id'
         ]);
 
         $validated['user_id'] = auth()->id();
@@ -43,7 +45,8 @@ class TaskController extends Controller
     {
         $statuses = TaskStatus::all();
         $priorities = TaskPriority::all();
-        return view('tasks.edit', compact('task', 'statuses', 'priorities'));
+        $groups = auth()->user()->groups()->get();
+        return view('tasks.edit', compact('task', 'statuses', 'priorities', 'groups'));
     }
 
     public function update(Request $request, Task $task)
@@ -59,6 +62,7 @@ class TaskController extends Controller
             'deadline' => 'nullable|date',
             'status_id' => 'required|exists:task_statuses,id',
             'priority_id' => 'required|exists:task_priorities,id',
+            'group_id' => 'nullable|exists:groups,id'
         ]);
 
         $task->update(attributes: $validated);

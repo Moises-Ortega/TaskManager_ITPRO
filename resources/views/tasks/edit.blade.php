@@ -58,6 +58,21 @@
                         @endforeach
                     </select>
                 </div>
+
+                @if($groups->count() > 0)
+                    <div>
+                        <label for="group_id" class="block text-sm font-medium text-purple-200 mb-1">Grupo</label>
+                        <select name="group_id" id="group_id" 
+                            class="w-full bg-transparent border border-purple-500/40 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-300">
+                            <option value="">Seleccionar un grupo</option>
+                            @foreach ($groups as $group)
+                                <option value="{{ $group->id }}" {{ $task->group_id == $group->id ? 'selected' : '' }} class="bg-indigo-900">{{ $group->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @else
+                    <p>No tienes ningun grupo creado aún</p>
+                @endif
     
                 <div class="flex justify-between items-center pt-4">
                     <a href="{{ route('tasks.index') }}"
